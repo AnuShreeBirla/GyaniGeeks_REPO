@@ -77,8 +77,46 @@ High-Level Flow
 User → React Frontend → Python Backend → SQL Database → Intelligence Layer → Backend → Frontend → User
 
 Architecture Description
-Architecture Diagram
-(Add system architecture diagram image here)
+Architecture Diagram(Add system architecture diagram image here)-
+
+                    ┌──────────────┐
+                    │     User     │
+                    └───────┬──────┘
+                            │
+                            ▼
+                ┌────────────────────┐
+                │   React Frontend   │
+                │ (UI + Tailwind)    │
+                └────────┬───────────┘
+                         │ API Calls
+                         ▼
+                ┌────────────────────┐
+                │   Python Backend   │
+                │  (RESTful APIs)    │
+                └───────┬────────────┘
+                        │
+        ┌───────────────┼────────────────┐
+        ▼                               ▼
+┌──────────────────┐           ┌─────────────────────┐
+│   SQL Database   │           │  Intelligence Layer │
+│ (Users, Scores,  │           │ (Pandas, NumPy)     │
+│  Progress Data)  │           │ Mastery + Gap Logic │
+└────────┬─────────┘           └──────────┬──────────┘
+         │                                  │
+         └───────────────┬──────────────────┘
+                         ▼
+                ┌────────────────────┐
+                │  Backend Response  │
+                └────────┬───────────┘
+                         ▼
+                ┌────────────────────┐
+                │  Frontend Display  │
+                │ (Charts - Matplot) │
+                └────────┬───────────┘
+                         ▼
+                    ┌──────────────┐
+                    │     User     │
+                    └──────────────┘
 
 # 5. Database Design
 ER Diagram
