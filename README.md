@@ -97,11 +97,78 @@ Selection Reasoning
 Alternatives Considered
 Evaluation Metrics
 # 8. Technology Stack
-Frontend
-Backend
-ML/AI
-Database
-Deployment
+🧩 Technology Stack
+🎨 Frontend
+
+React
+Tailwind CSS
+HTML5
+CSS3
+
+Purpose:
+
+Build responsive and interactive UI
+
+Capture user input
+
+Display mastery scores and adaptive roadmap
+
+Communicate with backend via APIs
+
+🧠 Backend
+
+Python
+JavaScript
+
+Purpose:
+
+Design and implement RESTful APIs
+
+Handle authentication securely
+
+Execute mastery scoring and gap detection logic
+
+Connect frontend with database
+
+🤖 Intelligence Layer
+
+Pandas
+NumPy
+Matplotlib
+
+Purpose:
+
+Process user performance data
+
+Calculate mastery scores
+
+Detect learning gaps
+
+Generate adaptive roadmaps
+
+Visualize learning progress
+
+🗄 Database
+
+MySQL (or any SQL-based database)
+
+Purpose:
+
+Store user data securely
+
+Track scores and progress
+
+Maintain roadmap data
+
+🚀 Deployment
+
+Cloud-based hosting platform
+
+Deployment-ready architecture
+
+Scalable backend and database design
+
+
 # 9. API Documentation & Testing
 API Endpoints List
 Endpoint 1:
