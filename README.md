@@ -169,19 +169,25 @@ Lead demo presentation
 🧩 Anu Shree Birla – Backend & Intelligence Engineer
 Responsibilities:
 
-Design and implement APIs
+Design and implement APIs using Python
 
-Implement:
+Manage structured data using SQL databases
 
-Mastery score logic
+Process and analyze user performance data using Pandas and NumPy
+
+Develop and implement:
+
+Mastery score calculation logic
 
 Gap detection algorithm
 
-Adaptive roadmap logic
+Adaptive roadmap generation logic
 
-Ensure authentication works properly
+Generate learning insights and visualizations using Matplotlib
 
-Connect backend with frontend
+Ensure secure authentication and protected user access
+
+Integrate backend services with the frontend using JavaScript
 
 🧩 Amrisha Ashish – Frontend & Experience Engineer
 Responsibilities:
