@@ -192,7 +192,7 @@ Integrate backend services with the frontend using JavaScript
 🧩 Amrisha Ashish – Frontend & Experience Engineer
 Responsibilities:
 
-Build UI using React + Tailwind
+Build UI using HTML + React + Tailwind
 
 Design:
 
