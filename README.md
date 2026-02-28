@@ -322,5 +322,6 @@ Improve user experience flow
 # 15. Future Scope & Scalability
 Short-Term
 Long-Term
-16. Known Limitations
-17. Impact
+# 16. Known Limitations
+# 17. Impact
+Failure doesn’t happen suddenly — it builds silently. But we will change that, our system monitors concept-level understanding and student confidence in real time. It identifies learning gaps early and provides adaptive guidance before small misunderstandings turn into major academic setbacks.
