@@ -79,7 +79,7 @@ User → React Frontend → Python Backend → SQL Database → Intelligence Lay
 Architecture Description
 Architecture Diagram(Add system architecture diagram image here)-
 
-                    ┌──────────────┐
+                                        ┌──────────────┐
                     │     User     │
                     └───────┬──────┘
                             │
