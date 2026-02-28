@@ -169,7 +169,7 @@ Lead demo presentation
 🧩 Anu Shree Birla – Backend & Intelligence Engineer
 Responsibilities:
 
-Design and implement APIs using Python
+Design and implement RESTful APIs using Python
 
 Manage structured data using SQL databases
 
