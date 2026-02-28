@@ -171,10 +171,6 @@ Responsibilities:
 
 Design and implement APIs
 
-Setup Node.js + Express server
-
-Manage MongoDB database
-
 Implement:
 
 Mastery score logic
