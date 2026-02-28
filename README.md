@@ -80,46 +80,59 @@ Architecture Description - The user interacts with the React frontend, which com
 
 Architecture Diagram(Add system architecture diagram image here)-
 
+                         ┌──────────────┐
+                         │     User     │
+                         └───────┬──────┘
+                                 │
+                                 ▼
+                ┌────────────────────────────────┐
+                │  Frontend (HTML / CSS / JS)    │
+                │  - Quiz Interface              │
+                │  - Dashboard                   │
+                │  - Streaks & XP Display        │
+                └──────────────┬─────────────────┘
+                               │
+                               │  HTTP Request (API Call)
+                               ▼
+                ┌────────────────────────────────┐
+                │     Python Backend (REST APIs) │
+                │  - Authentication              │
+                │  - Request Handling            │
+                │  - Data Validation             │
+                └──────────────┬─────────────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              ▼                                 ▼
+ ┌────────────────────────┐          ┌────────────────────────┐
+ │      SQL Database      │          │   Intelligence Layer   │
+ │ - Users                │          │ (Python + Pandas/Numpy)│
+ │ - Topics               │          │                        │
+ │ - Quiz Results         │          │ 1. Mastery Model       │
+ │ - Confidence Ratings   │          │ 2. Gap Detection       │
+ │ - Progress History     │          │ 3. Adaptive Roadmap    │
+ └──────────────┬─────────┘          └─────────────┬──────────┘
+                │                                     │
+                └──────────────┬──────────────────────┘
+                               ▼
+                ┌────────────────────────────────┐
+                │  Processed Response (JSON)     │
+                │  - Mastery %                   │
+                │  - Weak Topic Alerts           │
+                │  - Recommended Next Topics     │
+                └──────────────┬─────────────────┘
+                               ▼
+                ┌────────────────────────────────┐
+                │  Frontend Dashboard Update     │
+                │  - Progress Charts             │
+                │  - Alerts                      │
+                │  - Study Plan                  │
+                └──────────────┬─────────────────┘
+                               ▼
+                         ┌──────────────┐
+                         │     User     │
+                         └──────────────┘
 
-                                                     ┌──────────────┐
-                    │     User     │
-                    └───────┬──────┘
-                            │
-                            ▼
-                ┌────────────────────┐
-                │   Frontend (React) │
-                │   UI + Tailwind    │
-                └────────┬───────────┘
-                         │  API Request
-                         ▼
-                ┌────────────────────┐
-                │   Backend (Python) │
-                │   RESTful APIs     │
-                └───────┬────────────┘
-                        │
-        ┌───────────────┼────────────────┐
-        ▼                                ▼
-┌──────────────────┐           ┌─────────────────────┐
-│   SQL Database   │           │  Intelligence Layer │
-│ (Users, Scores,  │           │ (Pandas, NumPy)     │
-│  Progress Data)  │           │ Mastery + Gap Logic │
-└────────┬─────────┘           └──────────┬──────────┘
-         │                                  │
-         └───────────────┬──────────────────┘
-                         ▼
-                ┌────────────────────┐
-                │  Backend Response  │
-                └────────┬───────────┘
-                         ▼
-                ┌────────────────────┐
-                │ Frontend Display   │
-                │ (Charts/Insights)  │
-                └────────┬───────────┘
-                         ▼
-                    ┌──────────────┐
-                    │     User     │
-                    └──────────────┘
-
+                              
 # 5. Database Design
 ER Diagram
 (Add ER diagram image here)
