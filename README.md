@@ -74,7 +74,7 @@ Key Features - 1>Concept Mastery Mapping. Each topic has a mastery score calcula
 # 4. System Architecture
 
 High-Level Flow
-User → Frontend → Backend → Model → Database → Response
+User → React Frontend → Python Backend → SQL Database → Intelligence Layer → Backend → Frontend → User
 
 Architecture Description
 Architecture Diagram
