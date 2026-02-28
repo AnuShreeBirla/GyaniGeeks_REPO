@@ -322,6 +322,18 @@ Improve user experience flow
 # 15. Future Scope & Scalability
 Short-Term
 Long-Term
+
 # 16. Known Limitations
+
+1> The system currently relies on rule-based logic and does not use advanced predictive models.
+
+2> Concept gap detection depends on quiz performance and may not fully capture deeper misunderstandings.
+
+3> Real-time analysis may slow down with a very large number of users.
+
+4> Confidence tracking is self-reported and may not always reflect true understanding.
+
+5> Integration with institutional LMS platforms is not yet implemented.
+
 # 17. Impact
 Failure doesn’t happen suddenly — it builds silently. But we will change that, our system monitors concept-level understanding and student confidence in real time. It identifies learning gaps early and provides adaptive guidance before small misunderstandings turn into major academic setbacks.
