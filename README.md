@@ -320,8 +320,26 @@ Improve user experience flow
 
    
 # 15. Future Scope & Scalability
-Short-Term
-Long-Term
+
+Short Term - The platform currently supports a limited number of technology-related subjects. It does not yet cover disciplines such as medical sciences, commerce, humanities, or other specialized fields.
+
+Long Term - Currently, the system is designed as a self-assessment tool for students who feel they are not performing well academically. It focuses on individual concept tracking and early gap detection. At this stage, it does not include teacher-facing dashboards or institutional analytics support.
+
+In future versions, the system can be expanded to include:
+
+Teacher dashboards for class-level comprehension monitoring
+
+Institutional analytics for large-scale academic tracking
+
+Multi-domain subject support beyond technology fields
+
+Integration with LMS platforms
+
+Cloud-based infrastructure for large user scalability
+
+Advanced predictive analytics for enhanced gap detection
+
+With a modular and scalable backend structure, the platform can evolve from a focused student-support tool into a comprehensive academic monitoring ecosystem across multiple disciplines.
 
 # 16. Known Limitations
 
