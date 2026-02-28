@@ -177,11 +177,11 @@ Process and analyze user performance data using Pandas and NumPy
 
 Develop and implement:
 
-Mastery score calculation logic
+  Mastery score calculation logic
 
-Gap detection algorithm
+  Gap detection algorithm
 
-Adaptive roadmap generation logic
+  Adaptive roadmap generation logic
 
 Generate learning insights and visualizations using Matplotlib
 
@@ -196,13 +196,13 @@ Build UI using React + Tailwind
 
 Design:
 
-Dashboard
+  Dashboard
 
-Subject Page
+  Subject Page
 
-Leaderboard
+  Leaderboard
 
-Profile Page
+  Profile Page
 
 Implement charts and visualization
 
