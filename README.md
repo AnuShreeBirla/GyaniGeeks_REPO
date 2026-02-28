@@ -26,20 +26,20 @@ Root Cause Analysis - 1> Education tracks marks, not understanding.
   6> Core Insight: Academic failure often begins months before it becomes visible.
   
 Solution Strategy - We designed a full-stack intelligent platform that:
-  Tracks topic-wise mastery
-  Detects weak concepts early
-  Adapts study roadmap automatically
-  Provides structured subject flow
-  Uses performance data to recommend next steps
+  1> Tracks topic-wise mastery
+  2> Detects weak concepts early
+  3> Adapts study roadmap automatically
+  4> Provides structured subject flow
+  5> Uses performance data to recommend next steps
 
 # 3. Proposed Solution
 
 Solution Overview - A web-based personalized learning platform that:
-  Monitors mastery (0–100%) for each topic
-  Identifies weak topics
-  Suggests revision of prerequisites
-  Generates weekly study plans
-  Gamifies learning through streaks & leaderboard
+  1> Monitors mastery (0–100%) for each topic
+  2> Identifies weak topics
+  3> Suggests revision of prerequisites
+  4> Generates weekly study plans
+  5> Gamifies learning through streaks & leaderboard
 
 Core Idea - Instead of measuring how much content a student covers, we measure how well they understand each concept and advance through the subject accordingly.
 
