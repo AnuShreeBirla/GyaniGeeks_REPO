@@ -1,3 +1,1 @@
-# GyaniGeeks_REPO
-
-Project Title - The Silent Academic Dropout Crisis
+# Project Title - The Silent Academic Dropout Crisis
