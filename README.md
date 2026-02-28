@@ -130,7 +130,87 @@ Demo Video Link:
 GitHub Repository:
 # 13. Hackathon Deliverables Summary
 # 14. Team Roles & Responsibilities
-Member Name	Role	Responsibilities
+
+🧩 Aastha Musale  – Product & Operations Lead
+
+(Strategy, Coordination & Quality Control)
+
+Responsibilities:
+📌 Product Planning
+
+Define overall product vision
+
+Finalize core features for MVP
+
+Prioritize what to build (and what to skip)
+
+🗂 Project Management
+
+Divide tasks efficiently
+
+Track development progress
+
+Ensure deadlines are met within 24 hrs
+
+🏗 System Coordination
+
+Ensure frontend and backend integration is smooth
+
+🎤 Presentation & Documentation
+
+Prepare pitch deck
+
+Write problem statement
+
+Explain architecture to judges
+
+Lead demo presentation
+
+🧩 Anu Shree Birla – Backend & Intelligence Engineer
+Responsibilities:
+
+Design and implement APIs
+
+Setup Node.js + Express server
+
+Manage MongoDB database
+
+Implement:
+
+Mastery score logic
+
+Gap detection algorithm
+
+Adaptive roadmap logic
+
+Ensure authentication works properly
+
+Connect backend with frontend
+
+🧩 Amrisha Ashish – Frontend & Experience Engineer
+Responsibilities:
+
+Build UI using React + Tailwind
+
+Design:
+
+Dashboard
+
+Subject Page
+
+Leaderboard
+
+Profile Page
+
+Implement charts and visualization
+
+Ensure responsive and clean UI
+
+Integrate APIs
+
+Improve user experience flow
+
+   
 # 15. Future Scope & Scalability
 Short-Term
 Long-Term
