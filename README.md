@@ -80,24 +80,25 @@ Architecture Description - The user interacts with the React frontend, which com
 
 Architecture Diagram(Add system architecture diagram image here)-
 
-                                        ┌──────────────┐
+
+                                                     ┌──────────────┐
                     │     User     │
                     └───────┬──────┘
                             │
                             ▼
                 ┌────────────────────┐
-                │   React Frontend   │
-                │ (UI + Tailwind)    │
+                │   Frontend (React) │
+                │   UI + Tailwind    │
                 └────────┬───────────┘
-                         │ API Calls
+                         │  API Request
                          ▼
                 ┌────────────────────┐
-                │   Python Backend   │
-                │  (RESTful APIs)    │
+                │   Backend (Python) │
+                │   RESTful APIs     │
                 └───────┬────────────┘
                         │
         ┌───────────────┼────────────────┐
-        ▼                               ▼
+        ▼                                ▼
 ┌──────────────────┐           ┌─────────────────────┐
 │   SQL Database   │           │  Intelligence Layer │
 │ (Users, Scores,  │           │ (Pandas, NumPy)     │
@@ -111,8 +112,8 @@ Architecture Diagram(Add system architecture diagram image here)-
                 └────────┬───────────┘
                          ▼
                 ┌────────────────────┐
-                │  Frontend Display  │
-                │ (Charts - Matplot) │
+                │ Frontend Display   │
+                │ (Charts/Insights)  │
                 └────────┬───────────┘
                          ▼
                     ┌──────────────┐
