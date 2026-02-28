@@ -76,7 +76,7 @@ Key Features - 1>Concept Mastery Mapping. Each topic has a mastery score calcula
 High-Level Flow
 User → React Frontend → Python Backend → SQL Database → Intelligence Layer → Backend → Frontend → User
 
-Architecture Description - The user interacts with the React frontend, which communicates with our Python backend via RESTful APIs. The backend retrieves and stores data in a SQL database and processes it through our intelligence layer built using Pandas and NumPy. The computed mastery scores and adaptive roadmap are then returned to the frontend for visualization.
+Architecture Description - The user interacts with the frontend, which communicates with our Python backend via RESTful APIs. The backend retrieves and stores data in a SQL database and processes it through our intelligence layer built using Pandas and NumPy. The computed mastery scores and adaptive roadmap are then returned to the frontend for visualization.
 
 Architecture Diagram(Add system architecture diagram image here)-
 
