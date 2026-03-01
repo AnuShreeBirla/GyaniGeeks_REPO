@@ -1,0 +1,27 @@
+{
+  "name": "flask-react-quiz-app",
+  "version": "1.0.0",
+  "description": "A quiz application using Flask as the backend and React as the frontend.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "http://localhost:3000",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/flask-react-quiz-app.git"
+  }
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div id="results">
+            <h2>Your Results</h2>
+            <p id="accuracy"></p>
+            <p id="confidence"></p>
+            <p id="mastery"></p>
+            <p id="status"></p>
+            <h3>Recommended Roadmap</h3>
+            <ul id="roadmap"></ul>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Run these from the Hacathon folder. If your repo is inside Hacathon: cd Hacathon first, then run.
+
+# ----- USER 1: Aastha050 -----
+git config user.name "Aastha050"
+git config user.email "gsraastha5@gmail.com"
+git add index.html dashboard.html style.css README.md
+git commit -m "Aastha050: Home, Dashboard, styles, README"
+
+# ----- USER 2: AnuShreeBirla -----
+git config user.name "AnuShreeBirla"
+git config user.email "anushreebirla14@gmail.com"
+git add backend/app.py backend/auth.py backend/db.py login.html course.html
+git commit -m "AnuShreeBirla: Backend (Flask, auth, DB), Login, Course"
+
+# ----- USER 3: ammu_18 -----
+git config user.name "ammu_18"
+git config user.email "amrishaaashish@gmail.com"
+git add main.js subjects.html subject-detail.html profile.html leaderboard.html maths.html
+git commit -m "ammu_18: Main script, Subjects, Subject detail, Profile, Leaderboard, Maths"
+
+# ----- PUSH (run once at the end) -----
+git push origin main
