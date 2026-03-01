@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - AI Learning IQ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <h1>AI Learning IQ</h1>
+    <p class="auth-tagline">Personalized learning intelligence for college students</p>
+    <div class="auth-card card">
+      <ul class="auth-tabs">
+        <li><a href="#" class="active" data-tab="login">Login</a></li>
+        <li><a href="#" data-tab="register">Register</a></li>
+      </ul>
+      <div id="login-form" class="auth-form">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="you@example.com" />
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="••••••••" />
+        <button type="button" class="btn btn-full" id="btn-login">Login</button>
+      </div>
+      <div id="register-form" class="auth-form" style="display:none;">
+        <label>Name</label>
+        <input type="text" id="reg-name" placeholder="Your name" />
+        <label>Email</label>
+        <input type="email" id="reg-email" placeholder="you@example.com" />
+        <label>College</label>
+        <input type="text" id="reg-college" placeholder="College name" />
+        <label>Stream</label>
+        <input type="text" id="reg-stream" placeholder="e.g. CSE, Medical" />
+        <button type="button" class="btn btn-full" id="btn-register">Register</button>
+      </div>
+    </div>
+    <p id="auth-message" class="auth-message"></p>
+  </div>
+  <script>
+    const API = (window.location.origin && !window.location.origin.startsWith('file')) ? window.location.origin : 'http://localhost:5001';
+    document.querySelectorAll('.auth-tabs a').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelectorAll('.auth-tabs a').forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+        document.getElementById('login-form').style.display = a.dataset.tab === 'login' ? 'block' : 'none';
+        document.getElementById('register-form').style.display = a.dataset.tab === 'register' ? 'block' : 'none';
+      });
+    });
+    function msg(t, isErr) {
+      const el = document.getElementById('auth-message');
+      el.textContent = t;
+      el.style.color = isErr ? 'var(--danger)' : 'var(--success)';
+    }
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      if (!email) { msg('Enter email', true); return; }
+      try {
+        const res = await fetch(API + '/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          msg('Logged in! Redirecting...');
+          setTimeout(() => { window.location.href = '/'; }, 500);
+        } else {
+          msg(data.error || 'Login failed', true);
+        }
+      } catch (e) {
+        msg('Network error', true);
+      }
+    });
+    document.getElementById('btn-register').addEventListener('click', async () => {
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const college = document.getElementById('reg-college').value.trim();
+      const stream = document.getElementById('reg-stream').value.trim();
+      if (!name || !email) { msg('Name and email required', true); return; }
+      try {
+        const res = await fetch(API + '/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, college, stream })
+        });
+        const data = await res.json();
+        if (data.success) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          msg('Registered! Redirecting...');
+          setTimeout(() => { window.location.href = '/'; }, 500);
+        } else {
+          msg(data.error || 'Registration failed', true);
+        }
+      } catch (e) {
+        msg('Network error', true);
+      }
+    });
+  </script>
+</body>
+</html>

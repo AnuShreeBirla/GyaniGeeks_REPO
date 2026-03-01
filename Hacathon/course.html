@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses - AI Learning IQ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header (same across all pages) -->
+  <header>
+    <h2>AI Learning IQ</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="courses.html" class="active">Courses</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" class="notification-badge">🔔</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Page title -->
+    <div class="text-center mb-lg">
+      <h1>Select Your Course</h1>
+      <p class="mb-md" style="font-size: 1.1rem; color: var(--dark-2);">Choose a subject to start your personalized learning journey</p>
+    </div>
+
+    <!-- Single Maths Course Card (as requested) -->
+    <div class="grid">
+      <div class="card" style="max-width: 500px; margin: 0 auto;">
+        <!-- Course header -->
+        <div class="text-center mb-md">
+          <div style="font-size: 3rem; margin-bottom: var(--space-sm);">📘</div>
+          <h2>Mathematics</h2>
+          <p style="color: var(--dark-2); font-size: 1.1rem;">Master calculus, algebra, and more</p>
+        </div>
+
+        <!-- Course stats -->
+        <div class="grid" style="grid-template-columns: 1fr 1fr;">
+          <div>
+            <strong>12 Topics</strong><br>
+            <small style="color: #64748b;">Calculus, Algebra, Geometry</small>
+          </div>
+          <div>
+            <strong>4 Weeks</strong><br>
+            <small style="color: #64748b;">Adaptive roadmap</small>
+          </div>
+        </div>
+
+        <!-- Progress (if enrolled) -->
+        <div class="progress-bar" style="margin-top: var(--space-md);">
+          <div class="progress-fill" style="width: 35%;"></div>
+        </div>
+        <p class="text-center mb-md" style="color: var(--dark-2);">35% Complete | 8/12 Topics</p>
+
+        <!-- AI Recommendations -->
+        <div class="card" style="background: #f8fafc; margin: 1rem -1.5rem 1rem -1.5rem; border-radius: 0;">
+          <h3 style="color: var(--primary);">🎯 AI Recommendation</h3>
+          <p><strong>Start with:</strong> Limits (Week 1)</p>
+          <p style="color: #64748b; font-size: 0.95rem;">
+            Your mastery gap detected in foundational calculus. 
+            Complete Limits → Derivatives → Integration.
+          </p>
+        </div>
+
+        <!-- Topics Preview -->
+        <div>
+          <h3>📋 Week-wise Roadmap</h3>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: var(--space-sm);">
+            <div class="card" style="padding: 1rem; background: #f0f9ff; border-left: 4px solid var(--primary);">
+              <strong>Week 1:</strong> Limits + Functions
+            </div>
+            <div class="card" style="padding: 1rem; background: #f0fdf4; border-left: 4px solid var(--success);">
+              <strong>Week 2:</strong> Derivatives + Applications
+            </div>
+            <div class="card" style="padding: 1rem; background: #fef3c7; border-left: 4px solid var(--warning);">
+              <strong>Week 3:</strong> Integration Basics
+            </div>
+            <div class="card" style="padding: 1rem; background: #fce7f3; border-left: 4px solid var(--accent);">
+              <strong>Week 4:</strong> Advanced Topics + Review
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="text-center" style="margin-top: var(--space-lg);">
+          <a href="maths.html" class="btn" style="width: 100%; font-size: 1.1rem; padding: 1rem 2rem; text-decoration: none; display: block;">
+  🎯 Start Learning Maths
+</a>
+
+           
+         
+          <p style="margin-top: var(--space-sm); color: #64748b;">
+            Estimated time: 45 mins per topic
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extra Knowledge Section -->
+    <div class="card text-center">
+      <h3>💡 Why Learn Maths?</h3>
+      <div class="grid">
+        <div>
+          <strong>Engineering Entrance</strong><br>
+          <small>JEE Main/Advanced</small>
+        </div>
+        <div>
+          <strong>Competitive Exams</strong><br>
+          <small>NEET, GATE</small>
+        </div>
+        <div>
+          <strong>College Foundation</strong><br>
+          <small>B.Tech Semester 1</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (optional) -->
+  <footer style="background: var(--dark); color: var(--white); text-align: center; padding: 2rem; margin-top: 3rem;">
+    <p>&copy; 2026 AI Learning Intelligence. Built for hackathons 🚀</p>
+  </footer>
+</body>
+</html>
