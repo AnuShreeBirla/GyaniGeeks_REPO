@@ -245,8 +245,10 @@ Checkpoint 6: Deployment
 Deliverables:
 # 11. End-to-End Workflow
 # 12. Demo & Video
+
 Google Drive Link: https://drive.google.com/drive/folders/1zS0Ur5ripb8ns2_nhxTzLD1gfoupTIVL?usp=sharing
-Deployed Link : https://drive.google.com/drive/folders/1zS0Ur5ripb8ns2_nhxTzLD1gfoupTIVL?usp=sharing
+
+Deployed Link : https://gyanigeeks-repo-2.onrender.com
 # 13. Hackathon Deliverables Summary
 # 14. Team Roles & Responsibilities
 
