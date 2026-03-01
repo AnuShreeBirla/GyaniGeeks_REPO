@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h2>AI Learning IQ <span class="streak-badge">🔥 0 day streak</span></h2>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/dashboard" class="active">Dashboard</a>
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/subjects">Subjects</a>
+      <a href="/course">Courses</a>
+      <a href="/profile">Profile</a>
+      <a href="#" class="notification-badge" id="nav-notif">🔔</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Dashboard</h2>
+
+    <div class="grid">
+      <!-- AI Recommendations (filled by main.js) -->
+      <div class="card">
+        <h3>🤖 Recommended Next</h3>
+        <div id="recommendations"><p class="text-gray-500">Loading…</p></div>
+      </div>
+
+      <!-- Progress graph -->
+      <div class="card">
+        <h3>📈 Concept Mastery</h3>
+        <canvas id="progressChart" style="height: 180px;"></canvas>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Study streak -->
+      <div class="card">
+        <h3>🔥 Study Streak</h3>
+        <p><strong class="streak-badge">0 days</strong> ✅</p>
+      </div>
+
+      <!-- Weak Topics (filled by main.js) -->
+      <div class="card">
+        <h3>❌ Weak Topics</h3>
+        <div id="weakTopics"><p class="text-gray-500">Loading…</p></div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="card">
+      <h3>🏅 Badges</h3>
+      <div id="badges-list" class="badges">
+        <span class="badge badge-beginner">Beginner</span>
+        <span class="badge badge-foundation">Foundation Built</span>
+        <span class="badge badge-master">Concept Mastered</span>
+        <span class="badge badge-champion">Streak Champion</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>📥 Downloads</h3>
+        <ul id="downloads-list"><li class="text-muted">No downloads yet</li></ul>
+      </div>
+      <div class="card">
+        <h3>📝 Recent Test Scores</h3>
+        <ul id="test-scores-list"><li class="text-muted">Loading…</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

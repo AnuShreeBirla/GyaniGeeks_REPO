@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Learning Intelligence</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h2>AI Learning IQ</h2>
+    <nav>
+      <span class="nav-user" id="nav-user-name">Guest</span>
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/subjects">All Courses</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/profile">Profile</a>
+      <a href="#" class="notification-badge" id="nav-notif">🔔</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Hi, <span id="home-user-name">Avinash</span> 👋</h1>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🎯 Recommended Subjects (AI-based)</h3>
+        <div id="recommended-subjects"><p class="text-muted">Loading…</p></div>
+        <p class="small text-muted">What you should learn next · Estimated time per topic</p>
+      </div>
+
+      <div class="card">
+        <h3>📚 Continue Learning</h3>
+        <div id="continue-learning">
+          <p><strong id="resume-topic">—</strong></p>
+          <div class="progress-bar"><div class="progress-fill" id="resume-progress" style="width: 0%"></div></div>
+          <p id="resume-meta">Resume your last topic</p>
+          <button type="button" class="btn" id="btn-resume">Resume</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>💡 Motivational Quote</h3>
+      <div class="quote-box">
+        <p id="rotating-quote">"Small progress daily leads to big results."</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔥 Today's Focus</h3>
+      <p id="today-focus">AI-generated daily micro-goal: Complete one topic quiz or revise a weak topic for 20 mins.</p>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    (function() {
+      const quotes = [
+        "Small progress daily leads to big results.",
+        "The expert in anything was once a beginner.",
+        "Learning is a treasure that will follow its owner everywhere.",
+        "Success is the sum of small efforts repeated day in and day out.",
+        "Don't study to earn, study to learn. What you learn today is what you become tomorrow."
+      ];
+      let qi = 0;
+      function nextQuote() {
+        document.getElementById('rotating-quote').textContent = '"' + quotes[qi % quotes.length] + '"';
+        qi++;
+      }
+      nextQuote();
+      setInterval(nextQuote, 8000);
+
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const name = user.name || 'Avinash';
+      document.getElementById('home-user-name').textContent = name;
+      const navUser = document.getElementById('nav-user-name');
+      if (navUser) navUser.textContent = name;
+
+      const API = (window.location.origin && !window.location.origin.startsWith('file')) ? window.location.origin : 'http://localhost:5001';
+      const uid = user.id || 1;
+
+      fetch(API + '/api/recommendations/' + uid).then(r => r.json()).then(data => {
+        const rec = typeof data.recommendations === 'string' ? JSON.parse(data.recommendations) : data.recommendations;
+        const el = document.getElementById('recommended-subjects');
+        el.innerHTML = '<p><strong>Next:</strong> ' + (rec.next_topic || '—') + '</p>' +
+          '<p>Estimated: ' + (rec.estimated_completion || '—') + '</p>' +
+          (rec.daily_plan ? '<ul class="small-list">' + rec.daily_plan.slice(0, 3).map(d => '<li>' + d + '</li>').join('') + '</ul>' : '');
+      }).catch(() => {
+        document.getElementById('recommended-subjects').innerHTML = '<p>Calculus (weak: Integration)</p><p>Data Structures (medium: Trees)</p>';
+      });
+
+      fetch(API + '/api/user/' + uid).then(r => r.json()).then(u => {
+        const mastery = u.mastery_map || {};
+        const entries = Object.entries(mastery).filter(([_, s]) => Number(s) < 100);
+        const lastTopic = entries[entries.length - 1];
+        if (lastTopic) {
+          document.getElementById('resume-topic').textContent = 'Topic #' + lastTopic[0];
+          document.getElementById('resume-progress').style.width = lastTopic[1] + '%';
+          document.getElementById('resume-meta').textContent = lastTopic[1] + '% completed';
+        }
+        document.getElementById('today-focus').textContent =
+          u.streak < 3 ? 'Build your streak! Study for at least 15 minutes today.' :
+          'Revise one weak topic for 20 minutes. Then attempt 5 practice questions.';
+      }).catch(() => {});
+
+      document.getElementById('btn-resume').addEventListener('click', () => { window.location.href = '/subjects'; });
+    })();
+  </script>
+</body>
+</html>
