@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subjects - AI Learning IQ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h2>AI Learning IQ</h2>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/subjects" class="active">Subjects</a>
+      <a href="/course">Courses</a>
+      <a href="/profile">Profile</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Your Subjects</h2>
+    <p class="text-muted">Each subject: topics list, time per topic, completion %, week-wise roadmap</p>
+    <div class="subject-grid" id="subjects-container">
+      <p class="text-muted">Loading…</p>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const API = (window.location.origin && !window.location.origin.startsWith('file')) ? window.location.origin : 'http://localhost:5001';
+      const uid = (JSON.parse(localStorage.getItem('user') || '{}')).id || 1;
+
+      Promise.all([
+        fetch(API + '/api/subjects').then(r => r.json()),
+        fetch(API + '/api/user/' + uid).then(r => r.json())
+      ]).then(([subjects, user]) => {
+        const mastery = user.mastery_map || {};
+        const enrolled = user.enrolled_courses || ['Data Structures', 'Calculus'];
+
+        return Promise.all(subjects.map(s =>
+          fetch(API + '/api/subjects/' + s.id + '/topics').then(r => r.json()).then(topics => {
+            const completed = topics.filter(t => (mastery[t.id] || 0) >= 60).length;
+            const total = topics.length;
+            const pct = total ? Math.round((completed / total) * 100) : 0;
+            const weekRoadmap = topics.reduce((acc, t) => {
+              const w = t.week_number || 1;
+              if (!acc[w]) acc[w] = [];
+              acc[w].push(t.name);
+              return acc;
+            }, {});
+            const weekHtml = Object.keys(weekRoadmap).sort((a,b)=>+a - +b).map(w =>
+              '<p><strong>Week ' + w + '</strong>: ' + weekRoadmap[w].join(' + ') + '</p>'
+            ).join('');
+            return '<div class="subject-card card">' +
+              '<h3>📘 ' + s.name + '</h3>' +
+              '<p>Topics: ' + total + ' | Completed: ' + completed + '</p>' +
+              '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+              '<div class="week-roadmap">' + weekHtml + '</div>' +
+              '<a href="/subject/' + s.id + '" class="btn">Open</a>' +
+              '</div>';
+          })
+        )).then(htmls => {
+          document.getElementById('subjects-container').innerHTML = htmls.join('');
+        });
+      }).catch(() => {
+        document.getElementById('subjects-container').innerHTML =
+          '<div class="subject-card card"><h3>📘 Data Structures</h3><p>Topics: 4</p><a href="/subject/1" class="btn">Open</a></div>' +
+          '<div class="subject-card card"><h3>📘 Calculus</h3><p>Topics: 3</p><a href="/subject/2" class="btn">Open</a></div>';
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematics Roadmap - AI Learning IQ</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .quiz-container { max-width: 600px; margin: 0 auto; }
+    .question { margin-bottom: 1.5rem; }
+    .question h4 { color: var(--primary); margin-bottom: 0.75rem; }
+    .option { display: block; margin: 0.5rem 0; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .option:hover, .option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+    .roadmap-topic { border-left: 4px solid var(--primary); padding-left: 1rem; margin: 1rem 0; }
+    .video-thumbnail { width: 100%; height: 200px; background: linear-gradient(45deg, #667eea 25%, #764ba2 25%, #764ba2 50%, #f093fb 50%, #f093fb 75%, #667eea 75%); background-size: 20px 20px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; margin-bottom: 1rem; }
+    /* ===== Maths Roadmap - Byju's Style Specific CSS ===== */
+
+/* Quiz Container */
+.quiz-container {
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+}
+
+/* Question Styling */
+.question {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  border-left: 5px solid var(--primary);
+}
+
+.question h4 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Option Buttons (Byju's style) */
+.option {
+  display: block;
+  margin: 0.75rem 0;
+  padding: 1rem 1.25rem;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  font-weight: 500;
+}
+
+.option:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.option.selected {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+}
+
+/* Roadmap Topics */
+.roadmap-topic {
+  border-left: 5px solid var(--primary);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+}
+
+/* Video Thumbnails (Byju's video cards) */
+.video-thumbnail {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(45deg, 
+    #667eea 25%, #764ba2 25%, #764ba2 50%, 
+    #f093fb 50%, #f093fb 75%, #667eea 75%);
+  background-size: 30px 30px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-thumbnail::before {
+  content: '▶';
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Progress Steps */
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  background: #cbd5e1;
+  position: relative;
+}
+
+.step.active {
+  background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+.step.completed {
+  background: var(--success);
+}
+
+/* AI Analysis Box */
+.ai-analysis {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-lg);
+}
+
+.ai-analysis h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Week Headers */
+.week-header {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* Mastery Cards */
+.mastery-card {
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 1.5rem;
+}
+
+.mastery-score {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .question {
+    padding: 1rem;
+  }
+  
+  .option {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+  
+  .video-thumbnail {
+    height: 150px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Submit Button Animation */
+#quizForm .btn {
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  font-size: 1.2rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+#quizForm .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+#quizForm .btn:hover::before {
+  left: 100%;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h2>AI Learning IQ</h2>
+    <nav>
+      <a href="course.html">← Back to Courses</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="index.html">Home</a>
+      <span style="flex: 1;"></span>
+      <a href="#" class="notification-badge">🔔</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Progress Indicator -->
+    <div class="card text-center">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 20%;"></div>
+      </div>
+      <p><strong>Step 1 of 4:</strong> Diagnostic Test → Personalized Roadmap → Learning → Practice</p>
+    </div>
+
+    <div class="quiz-container">
+      <!-- Diagnostic Questionnaire (Byju's Style) -->
+      <div id="diagnostic-quiz" class="card">
+        <h1>🧠 Quick Diagnostic Test</h1>
+        <p class="mb-md" style="color: var(--dark-2);">Answer these 5 questions to build your <strong>personalized 4-week roadmap</strong></p>
+        
+        <form id="quizForm">
+          <div class="question">
+            <h4>1. Limits: What is lim (x→2) (x²-4)/(x-2)?</h4>
+            <label class="option" data-answer="4"><strong>A)</strong> 4</label>
+            <label class="option" data-answer="0"><strong>B)</strong> 0</label>
+            <label class="option" data-answer="DNE"><strong>C)</strong> Does not exist</label>
+          </div>
+
+          <div class="question">
+            <h4>2. Derivatives: d/dx (x³) = ?</h4>
+            <label class="option" data-answer="3x²"><strong>A)</strong> 3x²</label>
+            <label class="option" data-answer="x²"><strong>B)</strong> x²</label>
+            <label class="option" data-answer="3x"><strong>C)</strong> 3x</label>
+          </div>
+
+          <div class="question">
+            <h4>3. Integration: ∫x dx = ?</h4>
+            <label class="option" data-answer="x²/2+C"><strong>A)</strong> x²/2 + C</label>
+            <label class="option" data-answer="x²+C"><strong>B)</strong> x² + C</label>
+            <label class="option" data-answer="2x+C"><strong>C)</strong> 2x + C</label>
+          </div>
+
+          <div class="question">
+            <h4>4. How comfortable are you with Functions?</h4>
+            <label class="option" data-answer="expert"><strong>A)</strong> Expert (teach others)</label>
+            <label class="option" data-answer="good"><strong>B)</strong> Good (solve easily)</label>
+            <label class="option" data-answer="need-practice"><strong>C)</strong> Need practice</label>
+            <label class="option" data-answer="beginner"><strong>D)</strong> Beginner</label>
+          </div>
+
+          <div class="question">
+            <h4>5. Study time available per day?</h4>
+            <label class="option" data-answer="60+"><strong>A)</strong> 60+ mins</label>
+            <label class="option" data-answer="30-60"><strong>B)</strong> 30-60 mins</label>
+            <label class="option" data-answer="15-30"><strong>C)</strong> 15-30 mins</label>
+          </div>
+
+          <button type="submit" class="btn" style="width: 100%; font-size: 1.1rem;">🚀 Generate My Roadmap</button>
+        </form>
+      </div>
+
+      <!-- Personalized Roadmap (Hidden initially) -->
+      <div id="roadmap" class="card" style="display: none;">
+        <h1>🎯 Your Personalized 4-Week Maths Roadmap</h1>
+        <p><strong>AI Analysis:</strong> You need <span id="weak-area">Limits foundation</span>. Estimated mastery gap: <span id="gap-percent">35%</span></p>
+
+        <!-- Week 1 -->
+        <div class="roadmap-topic">
+          <h3>📅 Week 1: Foundation Building</h3>
+          <div class="grid">
+            <div class="card">
+              <div class="video-thumbnail">🎥 15-min Limits Lecture</div>
+              <p><strong>Topic:</strong> Limits Basics</p>
+              <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=FLpcmSj3L7E" target="_blank">Khan Academy Limits</a></p>
+              <p><strong>Est. Time:</strong> 25 mins</p>
+              <button class="btn btn-success" style="width: 100%; margin-top: 0.5rem;">📺 Watch Now</button>
+            </div>
+            <div class="card">
+              <h4>🧪 Quick Quiz (5 Qs)</h4>
+              <p>Score >80% → Move to Derivatives</p>
+              <button class="btn" style="width: 100%;">Take Quiz</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="roadmap-topic">
+          <h3>📅 Week 2: Derivatives</h3>
+          <div class="grid">
+            <div class="card">
+              <div class="video-thumbnail">🎥 20-min Derivatives</div>
+              <p><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=WvWQbMvE6BE" target="_blank">3Blue1Brown Derivatives</a></p>
+              <button class="btn btn-success">📺 Watch Now</button>
+            </div>
+            <div class="card">
+              <h4>💻 Practice Problems</h4>
+              <p>10 coding-style derivative questions</p>
+              <button class="btn">Solve Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress & Next Steps -->
+        <div class="card text-center" style="margin-top: 2rem;">
+          <h3>🎮 Daily Micro-Goal</h3>
+          <p><strong>Today:</strong> Complete Limits lecture + 5 quiz questions (25 mins)</p>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 0%;"></div>
+          </div>
+          <button class="btn" style="width: 100%; font-size: 1.2rem; margin-top: 1rem;">✅ Mark Complete & Next Topic</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+   <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    // Clickable options per question
+    document.querySelectorAll('.question').forEach(q => {
+        q.querySelectorAll('.option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                q.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    });
+
+    // Submit to backend
+    document.getElementById('quizForm').addEventListener('submit', async e => {
+        e.preventDefault();
+        
+        // Check answers
+        let answered = 0;
+        document.querySelectorAll('.question').forEach(q => {
+            if (q.querySelector('.option.selected')) answered++;
+        });
+        
+        if (answered < 3) {
+            alert(`Answer ${3-answered} more questions!`);
+            return;
+        }
+        
+        try {
+            const apiUrl = (window.location.origin && !window.location.origin.startsWith('file')) ? window.location.origin + '/api/quiz' : 'http://localhost:5001/api/quiz';
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    user_id: 'aasthamusale',
+                    scores: { quiz: [85, 92, 78] },
+                    confidence: 75
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                document.getElementById('diagnostic-quiz').style.display = 'none';
+                document.getElementById('roadmap').style.display = 'block';
+                const pctEl = document.getElementById('gap-percent');
+                if (pctEl) pctEl.textContent = `${data.mastery_percent != null ? data.mastery_percent : data.mastery}%`;
+                alert('🎯 ' + (data.message || `Mastery: ${data.mastery}%`));
+            } else {
+                alert(data.error || 'Quiz submit failed.');
+            }
+        } catch (error) {
+            alert('Backend not reachable. Start: cd backend && python app.py (runs on port 5001)');
+        }
+    });
+});
+
+
+  </script>
+</body>
+</html>

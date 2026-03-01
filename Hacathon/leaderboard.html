@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard - AI Learning IQ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h2>AI Learning IQ</h2>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/leaderboard" class="active">Leaderboard</a>
+      <a href="/subjects">Subjects</a>
+      <a href="/course">Courses</a>
+      <a href="/profile">Profile</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>🏆 Leaderboard</h2>
+    <p class="leaderboard-desc">Gamified ranking: tests completed, accuracy, consistency, XP</p>
+
+    <div class="grid">
+      <div class="card leaderboard-stats">
+        <h3>Your Rank</h3>
+        <p class="big-stat" id="my-rank">—</p>
+        <p><strong>XP:</strong> <span id="my-xp">0</span></p>
+        <p><strong>Streak:</strong> <span id="my-streak">0</span> days</p>
+      </div>
+      <div class="card">
+        <h3>📊 You are ahead of</h3>
+        <p class="big-stat" id="ahead-pct">0%</p>
+        <p>learners</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Comparison (XP)</h3>
+      <canvas id="leaderboard-chart" style="height: 200px;"></canvas>
+    </div>
+
+    <div class="card">
+      <h3>Top Learners</h3>
+      <table class="leaderboard-table">
+        <thead>
+          <tr><th>Rank</th><th>Name</th><th>XP</th><th>Streak</th></tr>
+        </thead>
+        <tbody id="leaderboard-body">
+          <tr><td colspan="4">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    (function() {
+      const API = (window.location.origin && !window.location.origin.startsWith('file')) ? window.location.origin : 'http://localhost:5001';
+      const uid = (JSON.parse(localStorage.getItem('user') || '{}')).id || 1;
+
+      fetch(API + '/api/leaderboard').then(r => r.json()).then(list => {
+        const tbody = document.getElementById('leaderboard-body');
+        tbody.innerHTML = list.map((r, i) =>
+          '<tr class="' + (r.user_id === uid ? 'my-rank-row' : '') + '"><td>' + r.rank + '</td><td>' + r.name + '</td><td>' + r.xp + '</td><td>' + r.streak + '</td></tr>'
+        ).join('');
+
+        const me = list.find(r => r.user_id === uid);
+        if (me) {
+          document.getElementById('my-rank').textContent = '#' + me.rank;
+          document.getElementById('my-xp').textContent = me.xp;
+          document.getElementById('my-streak').textContent = me.streak;
+          const total = list.length;
+          const ahead = total - me.rank;
+          document.getElementById('ahead-pct').textContent = total ? Math.round((ahead / total) * 100) : 0 + '%';
+        }
+
+        if (typeof Chart !== 'undefined' && list.length) {
+          const top10 = list.slice(0, 10);
+          new Chart(document.getElementById('leaderboard-chart'), {
+            type: 'bar',
+            data: {
+              labels: top10.map(r => r.name),
+              datasets: [{ label: 'XP', data: top10.map(r => r.xp), backgroundColor: 'rgba(99, 102, 241, 0.7)' }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+          });
+        }
+      }).catch(() => {
+        document.getElementById('leaderboard-body').innerHTML = '<tr><td colspan="4">Could not load leaderboard</td></tr>';
+      });
+    })();
+  </script>
+</body>
+</html>

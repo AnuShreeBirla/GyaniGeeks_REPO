@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subject - AI Learning IQ</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h2>AI Learning IQ</h2>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/subjects">Subjects</a>
+      <a href="/course">Courses</a>
+      <a href="/profile">Profile</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2 id="subject-title">Subject</h2>
+    <p id="subject-desc" class="text-muted"></p>
+
+    <div class="card">
+      <h3>📅 Week-wise Roadmap</h3>
+      <div id="week-roadmap"></div>
+    </div>
+
+    <div class="card">
+      <h3>📚 Topics</h3>
+      <ul id="topics-list"></ul>
+    </div>
+
+    <div class="card" id="extra-knowledge-card" style="display:none;">
+      <h3>🔮 Where this topic is used</h3>
+      <ul id="extra-knowledge-list"></ul>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const API = (window.location.origin && !window.location.origin.startsWith('file')) ? window.location.origin : 'http://localhost:5001';
+      const sid = parseInt(location.pathname.split('/subject/')[1], 10) || 1;
+      const uid = (JSON.parse(localStorage.getItem('user') || '{}')).id || 1;
+
+      fetch(API + '/api/subjects').then(r => r.json()).then(subjects => {
+        const sub = subjects.find(s => s.id === sid);
+        if (sub) {
+          document.getElementById('subject-title').textContent = sub.name;
+          document.getElementById('subject-desc').textContent = sub.description || sub.estimated_weeks + ' weeks';
+        }
+      }).catch(() => {});
+
+      fetch(API + '/api/subjects/' + sid + '/topics').then(r => r.json()).then(topics => {
+        const byWeek = {};
+        topics.forEach(t => {
+          const w = t.week_number || 1;
+          if (!byWeek[w]) byWeek[w] = [];
+          byWeek[w].push(t.name);
+        });
+        const weeks = Object.keys(byWeek).sort((a, b) => Number(a) - Number(b));
+        document.getElementById('week-roadmap').innerHTML = weeks.map(w =>
+          '<div class="roadmap-topic"><strong>Week ' + w + '</strong>: ' + byWeek[w].join(', ') + '</div>'
+        ).join('');
+
+        fetch(API + '/api/user/' + uid).then(r => r.json()).then(u => {
+          const mastery = u.mastery_map || {};
+          document.getElementById('topics-list').innerHTML = topics.map(t => {
+            const score = mastery[t.id] || 0;
+            return '<li class="topic-row">' +
+              '<span>' + t.name + '</span> ' +
+              '<span>' + t.estimated_time_mins + ' min</span> ' +
+              '<span class="progress-mini"><span class="progress-fill" style="width:' + score + '%"></span></span> ' +
+              '<span>' + score + '%</span> ' +
+              '<a href="/maths?topic=' + t.id + '" class="btn btn-sm">Quiz</a>' +
+              '</li>';
+          }).join('');
+        }).catch(() => {
+          document.getElementById('topics-list').innerHTML = topics.map(t =>
+            '<li>' + t.name + ' (' + t.estimated_time_mins + ' min) <a href="/maths?topic=' + t.id + '" class="btn btn-sm">Quiz</a></li>'
+          ).join('');
+        });
+      }).catch(() => {
+        document.getElementById('topics-list').innerHTML = '<li>Could not load topics</li>';
+      });
+
+      const topicName = new URLSearchParams(location.search).get('topic_name');
+      if (topicName) {
+        fetch(API + '/api/extra-knowledge/' + encodeURIComponent(topicName)).then(r => r.json()).then(data => {
+          document.getElementById('extra-knowledge-card').style.display = 'block';
+          document.getElementById('extra-knowledge-list').innerHTML = (data.uses || []).map(u => '<li>' + u + '</li>').join('');
+        }).catch(() => {});
+      }
+    })();
+  </script>
+</body>
+</html>

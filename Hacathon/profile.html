@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - AI Learning IQ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h2>AI Learning IQ</h2>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/subjects">Subjects</a>
+      <a href="/course">Courses</a>
+      <a href="/profile" class="active">Profile</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Profile</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>👤 Personal Info</h3>
+        <p><strong>Name:</strong> <span id="profile-name">—</span></p>
+        <p><strong>Email:</strong> <span id="profile-email">—</span></p>
+        <p><strong>College:</strong> <span id="profile-college">—</span></p>
+        <p><strong>Stream:</strong> <span id="profile-stream">—</span></p>
+      </div>
+
+      <div class="card">
+        <h3>⚙️ Settings</h3>
+        <label class="toggle-row">
+          <span>Dark mode</span>
+          <input type="checkbox" id="dark-mode-toggle" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔔 Reminders</h3>
+      <label>Daily study time</label>
+      <input type="time" id="reminder-time" />
+      <label class="toggle-row"><input type="checkbox" id="reminder-browser" checked /> Browser notification</label>
+      <label class="toggle-row"><input type="checkbox" id="reminder-email" /> Email reminder</label>
+      <button type="button" class="btn" id="save-reminder">Save</button>
+    </div>
+
+    <div class="card">
+      <h3>📥 Downloaded Resources</h3>
+      <ul id="profile-downloads"><li class="text-muted">None</li></ul>
+    </div>
+
+    <div class="card">
+      <h3>Share Profile</h3>
+      <button type="button" class="btn" id="share-profile">Share my progress</button>
+    </div>
+
+    <div class="card">
+      <h3>⭐ Rate Website</h3>
+      <div class="star-rating" id="star-rating">
+        <span data-stars="1">★</span><span data-stars="2">★</span><span data-stars="3">★</span><span data-stars="4">★</span><span data-stars="5">★</span>
+      </div>
+      <p id="rate-message" class="text-muted"></p>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    (function() {
+      const API = (window.location.origin && !window.location.origin.startsWith('file')) ? window.location.origin : 'http://localhost:5001';
+      const uid = (JSON.parse(localStorage.getItem('user') || '{}')).id || 1;
+
+      fetch(API + '/api/user/' + uid).then(r => r.json()).then(u => {
+        document.getElementById('profile-name').textContent = u.name || '—';
+        document.getElementById('profile-email').textContent = u.email || '—';
+        document.getElementById('profile-college').textContent = u.college || '—';
+        document.getElementById('profile-stream').textContent = u.stream || '—';
+        const dark = (u.theme || '').toLowerCase() === 'dark';
+        document.getElementById('dark-mode-toggle').checked = dark;
+        if (dark) document.body.classList.add('dark-mode');
+      }).catch(() => {});
+
+      document.getElementById('dark-mode-toggle').addEventListener('change', function() {
+        document.body.classList.toggle('dark-mode', this.checked);
+        fetch(API + '/api/user/' + uid, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') },
+          body: JSON.stringify({ theme: this.checked ? 'dark' : 'light' })
+        }).catch(() => {});
+      });
+
+      fetch(API + '/api/reminder/' + uid).then(r => r.json()).then(r => {
+        if (r.daily_study_time) document.getElementById('reminder-time').value = r.daily_study_time;
+        document.getElementById('reminder-browser').checked = r.notify_browser !== false;
+        document.getElementById('reminder-email').checked = r.notify_email === true;
+      }).catch(() => {});
+
+      document.getElementById('save-reminder').addEventListener('click', () => {
+        const time = document.getElementById('reminder-time').value;
+        fetch(API + '/api/reminder/' + uid, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            daily_study_time: time || null,
+            notify_browser: document.getElementById('reminder-browser').checked,
+            notify_email: document.getElementById('reminder-email').checked
+          })
+        }).then(() => alert('Reminders saved!')).catch(() => alert('Failed to save'));
+      });
+
+      fetch(API + '/api/downloads/' + uid).then(r => r.json()).then(list => {
+        const ul = document.getElementById('profile-downloads');
+        if (list.length) ul.innerHTML = list.map(d => '<li>' + d.resource_name + '</li>').join('');
+      }).catch(() => {});
+
+      document.getElementById('share-profile').addEventListener('click', () => {
+        if (navigator.share) {
+          navigator.share({ title: 'AI Learning IQ', text: 'Check my learning progress!', url: window.location.origin });
+        } else {
+          navigator.clipboard.writeText(window.location.origin);
+          alert('Link copied to clipboard!');
+        }
+      });
+
+      document.querySelectorAll('#star-rating span').forEach(s => {
+        s.addEventListener('click', () => {
+          const stars = parseInt(s.dataset.stars, 10);
+          fetch(API + '/api/rating', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('token') || '') },
+            body: JSON.stringify({ stars })
+          }).then(() => { document.getElementById('rate-message').textContent = 'Thanks for your rating!'; }).catch(() => {});
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
